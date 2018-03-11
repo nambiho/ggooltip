@@ -1,0 +1,28 @@
+{
+  "name": "ggooltip",
+  "version": "1.0.0",
+  "description": "message layer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nambiho/ggooltip.git"
+  },
+  "author": "nambiho <nambiho@naver.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nambiho/ggooltip/issues"
+  },
+  "homepage": "https://github.com/nambiho/ggooltip#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
