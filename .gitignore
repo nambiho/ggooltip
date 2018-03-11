@@ -3,3 +3,6 @@ ignore/
 
 # temp directory
 temp/
+
+# node_modules
+node_modules/
