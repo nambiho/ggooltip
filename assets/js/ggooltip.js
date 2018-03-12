@@ -3,8 +3,6 @@
 } (this, (function () {
 	"use strict";
 
-	
-
 	var define = {
 		"design":{
 			top:0
