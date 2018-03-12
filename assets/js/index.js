@@ -1,3 +1,18 @@
-window.addEventListener('DOMContentLoaded', function (e) {
-	console.log(gg)
-})
+;(function () {
+	"use strict";
+
+	window.addEventListener('DOMContentLoaded', function (e) {
+		var sl = new simplelib()
+		,showdiv = sl.util.getbyId('showdiv')
+		;
+		gg({
+			message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, praesentium.',
+			x:true,
+			design:{
+				width:100,
+				height:100
+			}
+		})
+	})
+	
+} ());
