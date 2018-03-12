@@ -8,13 +8,12 @@ function router (app) {
 	app.get('/', function (req, res) {
 		res.sendFile(__rootdir + '/index.html');
 	});
+	
 	app.get('/assets/js/:jsfile', function (req, res) {
-		// const jsfile = req.params.jsfile;
-		// if (!jsfile) {res.end(); return}
 		fs.stat(__rootdir + req.url, (err, stat) => {
 			if (err) {console.log(err); return}
-			console.log(__rootdir + req.url);
-			res.sendFile(__rootdir + req.url);
+			const output = fs.readFileSync(__rootdir + req.url, 'utf8');
+			res.send(output);
 			res.end();
 		});
 	});
