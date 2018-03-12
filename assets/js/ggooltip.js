@@ -1,5 +1,17 @@
-(function () {
+;(function (global, gg) {
+	global['gg'] = typeof exports === 'object' || typeof modules === 'object' ? null : gg;
+} (this, (function () {
 	"use strict";
-	alert(1)
-	console.log(1);
-} ());
+
+	
+
+	var define = {
+		"design":{
+			top:0
+		}
+	};
+
+	var gg = Object.create(define);
+
+	return gg;
+} ())));
