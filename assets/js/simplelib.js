@@ -172,7 +172,8 @@ this,
 				}, false)
 			}
 			info.text && (el.textContent = info.text);
-			(info.parent || document.body)["appendChild"](el);
+			//(info.parent || document.body)["appendChild"](el);
+			info.parent && info.parent.appendChild(el);
 			return el
 		},
 
