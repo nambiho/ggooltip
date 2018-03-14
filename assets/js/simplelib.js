@@ -172,6 +172,7 @@ this,
 				}, false)
 			}
 			info.text && (el.textContent = info.text);
+			info.html && (el.innerHTML = info.html);
 			//(info.parent || document.body)["appendChild"](el);
 			info.parent && info.parent.appendChild(el);
 			return el
