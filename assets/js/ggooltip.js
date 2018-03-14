@@ -10,9 +10,12 @@
 			text:option.message,
 			style:{
 				background:"#eee",
-				color:"black"
+				color:"black",
+				display:"inline-block",
+				padding:"10px"
 			}
-		}, document);
+		});
+		document.body.appendChild(element);
 	}
 
 	return gg
