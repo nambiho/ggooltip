@@ -8,23 +8,50 @@
 		<script src="/assets/js/simplelib.js"></script>
 		<script src="/assets/js/ggooltip.js"></script>
 		<script src="/assets/js/index.js"></script>
+		<style>
+			.span-width {
+				display: block;
+				word-break: break-all;
+				width: -webkit-calc(100% - 30px);
+				width: -moz-calc(100% - 30px);
+				width: calc(100% - 30px);
+			}
+		</style>
 	</head>
 	<body>
 		<h1>ggooltip message library</h1>
-
-
 		<div>
 			<div>
-				<div style="float:left; padding-right:10px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde, non?</div>
+				<div style="width: calc(100% - 50px)">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde, non?</div>
 				<div>
-					<svg width="10" height="10" version="1.1" xmlns="http://www.w3.org/2000/svg">
-						<line x1="0" y1="0" x2="100%" y2="100%" stroke="black" stroke-width="1" />
-						<line x1="0" y1="100%" x2="100%" y2="0" stroke="black" stroke-width="1" />
+					<svg width="50px" height="50px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="50%" cy="50%" r="49%" stroke="black" stroke-width="0.5" fill="white" />
+						<line x1="25%" y1="25%" x2="75%" y2="75%" stroke="black" stroke-width="1" />
+						<line x1="25%" y1="75%" x2="75%" y2="25%" stroke="black" stroke-width="1" />
 					</svg>
 				</div>
 			</div>
 		</div>
 
+		<div style="padding:10px; border:5px dashed gray; border-radius: 5px; background-color:#eee; position:absolute; width:290px; left:50%; top:50%; transform:translate(-50%, -50%);">
+			<div style="position:absolute; right:10px;">
+				<svg width="20px" height="20px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="50%" cy="50%" r="49%" stroke="black" stroke-width="0.5" fill="white" />
+					<line x1="25%" y1="25%" x2="75%" y2="75%" stroke="black" stroke-width="1" />
+					<line x1="25%" y1="75%" x2="75%" y2="25%" stroke="black" stroke-width="1" />
+				</svg>
+			</div>
+			
+			<div style="font-weight:bold; font-size:large; margin-bottom:10px; padding-bottom:10px; border-width:0 0 1px 0; border-style:double; ">
+				<span style="display:block; width:calc(100% - 30px); word-wrap:break-word;">
+					titletitletitletitletitletitletitletitletitle
+				</span>
+			</div>
+			
+			<div>
+				Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, sint.
+			</div>
+		</div>
 
 		<div id="showdiv" style="width:800px; height:500px; border:1px solid #ddd; font-family:(malgun gothic); margin:auto;"></div>
 	</body>
