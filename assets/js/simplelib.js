@@ -167,9 +167,10 @@ this,
 				el.style[style]=info.style[style]
 			}
 			for(var ev in info.event){
-				el.addEventListener(ev, function (e) {
-					info.event[ev].call(obj || this, e)
-				}, false)
+				isFunction(info.event[ev]) && addEvent(el, ev, info.event[ev]) //el.addEventListener(ev, info.event[ev], false)
+				// el.addEventListener(ev, function (e) {
+				// 	info.event[ev].call(obj || this, e)
+				// }, false)
 			}
 			info.child ? el.appendChild(info.child) : 
 				info.html ? el.innerHTML = info.html : 
@@ -185,6 +186,13 @@ this,
 			t && tp && isFunction(ev) && (t.addEventListener
 				? t.addEventListener(tp, ev || noop, c || false)
 				:t.attachEvent("on" + tp, ev || noop)
+			)
+		},
+
+		removeEvent = function (t,tp,ev) {
+			t && tp && isFunction(ev) && (t.removeEventListener
+				? t.removeEventListener(tp, ev || noop)
+				:t.dettachEvent("on" + tp, ev || noop)
 			)
 		},
 
@@ -321,6 +329,7 @@ this,
 		merge : merge,
 		createElement : createElement,
 		addEvent : addEvent,
+		removeEvent:removeEvent,
 		trigger : trigger,
 		getUrl : getUrl,
 		object : object,
