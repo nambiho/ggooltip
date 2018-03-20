@@ -7,11 +7,7 @@
 		;
 		gg({
 			message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, praesentium.',
-			x:true,
-			design:{
-				width:100,
-				height:100
-			}
+			x:true
 		})
 	})
 	
