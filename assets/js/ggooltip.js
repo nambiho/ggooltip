@@ -47,6 +47,7 @@ github https://github.com/nambiho/ggooltip
 				? option.parent 
 				: document.documentElement;
 		
+				
 		var frame,x,title,msg
 
 		if (option.type === 'message') {
