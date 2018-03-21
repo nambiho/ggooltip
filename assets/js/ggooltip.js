@@ -10,92 +10,90 @@ github https://github.com/nambiho/ggooltip
 } (this, (function () {
 	"use strict";
 	var sl = new simplelib();
-
-	var gg = function (option) {
-
-		/*
-		option
-		{
-
-			type: message, status
-			position: normal, center, top, right, bottom, left
-			textalign: left, right
-			stage: document.body
-			block: true, false
-			button:{
-				image:
-				click:
-				init:
-				position: top, right, bottom, left
-			}
-			x: true, false
-			animation: true, false
-			duration: true(=1500), false(=default), number(=1500)
-			title: string
-
-		}
-		*/
-
-		var option = sl.util.merge({
+	function getOption (opt) {
+		return opt = sl.util.merge({
 			type: "message",
 			position:"center",
 			width:"350px",
 			height:"150px",
 			message:"",
-			title:""
-		}, option);
-
+			title:"",
+			duration:false,
+			animation:false,
+			x:true,
+			button:false,
+			block:true,
+			stage:document,
+			textalign:'left',
+			event:{
+				init:sl.util.noop,
+				load:sl.util.noop,
+				unload:sl.util.noop
+			}
+		}, opt),
+		opt
+	}
+	function removeChild () {
+		// just call or apply
+		if (!sl.util.isDom(this)) return sl.util.noop;
+		return (function () {
+			this.parentNode.removeChild(this);
+		}).bind(this);
+	}
+	function gg (opt) {
+		var option = getOption(opt);
 		var parent = option.parent && 
 			(sl.util.isDom(option.parent) && option.parent.tagName !== "body") 
 				? option.parent 
 				: document.documentElement;
 		
-		var _remove = function () {
-			frame.parentNode.removeChild(frame);
+		var frame,x,title,msg
+
+		if (option.type === 'message') {
+			frame = sl.util.createElement({
+				dom:'div',
+				style:{
+					background:'#eee',
+					color:'black',
+					display:'table',
+					padding:'15px',
+					borderRadius:'10px',
+					padding:'10px',
+					border:'5px dashed gray',
+					zIndex:'999',
+					left:'50%',
+					top:'50%',
+					transform:'translate(-50%, -50%)',
+					position:'absolute',
+					width:'600px',
+					maxWidth:'400px'
+				},
+				event:(function () {
+					var gapX, gapY, parent, _move;
+					function _renderMove (elem) {
+						return function (e) {
+							elem.style.left = (window.event.clientX - gapX) + 'px';
+							elem.style.top = (window.event.clientY - gapY) + 'px';
+						}
+					}
+					return {
+						mousedown:function (e) {
+							var rect = this.getBoundingClientRect();
+							gapX = e.pageX - rect.x;
+							gapY = e.pageY - rect.y;
+	
+							if(e.button !== 0) return;
+							_move = _renderMove(this);
+							sl.util.addEvent(document, 'mousemove', _move)
+						},
+						mouseup:function (e) {
+							sl.util.removeEvent(document, 'mousemove', _move)
+						}
+					}
+				} ())
+			})
 		}
 
-		var frame = sl.util.createElement({
-			dom:'div',
-			style:{
-				background:'#eee',
-				color:'black',
-				//display:'inline-table',
-				padding:'15px',
-				borderRadius:'10px',
-				padding:'10px',
-				border:'5px dashed gray',
-				zIndex:'999',
-				//*
-				left:'50%',
-				top:'50%',
-				transform:'translate(-50%, -50%)',
-				// */
-				position:'absolute'
-			},
-			event:(function () {
-				var gapX, gapY, parent, _move;
-				function _renderMove (elem) {
-					return function (e) {
-						elem.style.left = (window.event.clientX - gapX) + 'px';
-						elem.style.top = (window.event.clientY - gapY) + 'px';
-					}
-				}
-				return {
-					mousedown:function (e) {
-						var rect = this.getBoundingClientRect();
-						gapX = e.pageX - rect.x;
-						gapY = e.pageY - rect.y;
-
-						if(e.button !== 0) return;
-						_move = _renderMove(this);
-						sl.util.addEvent(document, 'mousemove', _move)
-					},
-					mouseup:function (e) {
-						sl.util.removeEvent(document, 'mousemove', _move)
-					}
-				}
-			} ())
-		});
 
 		var x = sl.util.createElement({
 			dom:'div',
@@ -111,7 +109,7 @@ github https://github.com/nambiho/ggooltip
 				right:'10px'
 			},
 			event:{
-				'click':_remove
+				click: removeChild.call(frame)
 			}
 		});
 
@@ -139,7 +137,7 @@ github https://github.com/nambiho/ggooltip
 			}
 		});
 
-		var element = sl.util.createElement({
+		var msg = sl.util.createElement({
 			dom:'span',
 			text:option.message,
 			parent:frame,
