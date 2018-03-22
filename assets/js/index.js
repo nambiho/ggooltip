@@ -6,6 +6,7 @@
 		,showdiv = sl.util.getbyId('showdiv')
 		;
 		gg({
+			//message:{text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, praesentium.'},
 			message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, praesentium.',
 			x:true
 		})
