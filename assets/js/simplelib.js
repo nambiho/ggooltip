@@ -157,20 +157,20 @@ this,
 			return target || {}
 		},
 
-		createElement = function (info,obj) {
-			if (!info.dom) return null;
-			var el = document.createElement(info.dom);
-			for(var attr in info.attr) {
-				el.setAttribute(attr,info.attr[attr])
+		createElement = function (config,obj) {
+			if (!config.dom) return null;
+			var el = document.createElement(config.dom);
+			for(var attr in config.attr) {
+				el.setAttribute(attr,config.attr[attr])
 			}
-			css(el, info.style);
-			for(var ev in info.event){
-				isFunction(info.event[ev]) && addEvent(el, ev, info.event[ev])
+			css(el, config.style);
+			for(var ev in config.event){
+				isFunction(config.event[ev]) && addEvent(el, ev, config.event[ev])
 			}
-			info.child ? el.appendChild(info.child) : 
-				info.html ? el.innerHTML = info.html : 
-					info.text && ((el.textContent = info.text))
-			info.parent && info.parent.appendChild(el);
+			config.child ? el.appendChild(config.child) : 
+				config.html ? el.innerHTML = config.html : 
+					config.text && ((el.textContent = config.text))
+			config.parent && config.parent.appendChild(el);
 			return el
 		},
 
@@ -321,7 +321,7 @@ this,
 		merge : merge,
 		createElement : createElement,
 		addEvent : addEvent,
-		removeEvent:removeEvent,
+		removeEvent : removeEvent,
 		trigger : trigger,
 		getUrl : getUrl,
 		object : object,
