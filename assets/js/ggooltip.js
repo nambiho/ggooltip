@@ -45,13 +45,13 @@ github https://github.com/nambiho/ggooltip
 		}.bind(this)
 	}
 
+
 	function gg (conf) {
 		var config = getConfig(conf);
 		var parent = config.parent && 
 			(sl.util.isDom(config.parent) && config.parent.tagName !== "body") 
 				? config.parent 
 				: document.documentElement;
-		
 		var frame,close,title,msg;
 
 		if (config.type === 'message') {
@@ -60,21 +60,7 @@ github https://github.com/nambiho/ggooltip
 				attr:sl.util.merge({
 					class : 'frame'
 				}, (config.frame&&config.frame.attr) || {}),
-				style:sl.util.merge({
-					background:'#eee',
-					color:'black',
-					display:'table',
-					padding:'15px',
-					borderRadius:'10px',
-					padding:'10px',
-					border:'1px dashed gray',
-					zIndex:'999',
-					left:'50%',
-					top:'50%',
-					transform:'translate(-50%, -50%)',
-					position:'absolute',
-					width:config.width
-				}, (config.frame&&config.frame.style) || {}),
+				style:(config.frame&&config.frame.style) || {},
 				event:(function () {
 					var gapX, gapY, parent, _move;
 					function _renderMove (elem) {
@@ -112,47 +98,35 @@ github https://github.com/nambiho/ggooltip
 				'</svg>',
 			style:{
 				cursor:'pointer',
-				position:'absolute',
-				right:'10px'
+				//position:'relative',
+				//border:'1px solid gray',
+				//right:'0',
+				// margin:0,
+				// padding:0,
+				display:'inline-flex'
 			},
 			event:{
 				click: removeElement.call(frame)
 			}
 		});
 
+
 		title = sl.util.createElement({
-			dom:'div',
-			//text:'title2',
-			//html:"<span>span title</span>",
-			child:sl.util.createElement({
-				dom:'span',
-				text:'child title',
-				style:{
-					display:'block',
-					width:'calc(100% - 30px)',
-					wordWrap:'break-word'
-				}
-			}),
+			dom:'h1',
 			parent:frame,
+			text:'ggooltip message example',
 			style:{
-				background:'#fff',
-				padding:'5px',
-				fontWeight:'bold',
-				fontSize:'large',
-				marginBottom:'10px',
-				paddingBottom:'10px',
-				borderWidth:'0 0 1px 0',
-				borderStyle:'double'
+				fontSize:'1.5em',
+				wordWrap:'break-word'
 			}
 		});
+
 
 		msg = sl.util.createElement({
 			dom:'div',
 			text:((sl.util.isString(config.message) && config.message) || (sl.util.isJSON(config.message) && config.message.text)) || "",
 			parent:frame,
-			style:{
-				padding:'5px'
-			}
+			style:{}
 		});
 
 		document.body.appendChild(frame);
@@ -161,7 +135,7 @@ github https://github.com/nambiho/ggooltip
 			frame:frame,
 			close:close,
 			title:title,
-			msg
+			msg:msg
 		}
 	}
 
