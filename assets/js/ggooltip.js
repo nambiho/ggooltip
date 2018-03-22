@@ -9,66 +9,72 @@ github https://github.com/nambiho/ggooltip
 	global['gg'] = typeof exports === 'object' || typeof modules === 'object' ? {} : gg;
 } (this, (function () {
 	"use strict";
+
 	var sl = new simplelib();
-	function getOption (opt) {
-		return opt = sl.util.merge({
+
+	function getConfig (conf) {
+		return sl.util.merge({
+			frame:{
+				event:{
+					init:sl.util.noop,
+					load:sl.util.noop,
+					unload:sl.util.noop
+				}
+			},
+			close:{},
+			title:{
+				text:"",
+				event:{/*init*/}
+			},
+			button:false, //{init},
+			message:null, /*{text:"",event:{init:sl.util.noop}}*/
 			type: "message",
 			position:"center",
 			width:"350px",
 			height:"150px",
-			message:"",
-			title:"",
 			duration:false,
-			animation:false,
-			x:true,
-			button:false,
-			block:true,
-			stage:document,
-			textalign:'left',
-			event:{
-				init:sl.util.noop,
-				load:sl.util.noop,
-				unload:sl.util.noop
-			}
-		}, opt),
-		opt
+			stage:document
+		}, conf)
 	}
-	function removeChild () {
-		// just call or apply
+
+	function removeElement () {
+		// just use 'call' or 'apply' methods
 		if (!sl.util.isDom(this)) return sl.util.noop;
-		return (function () {
-			this.parentNode.removeChild(this);
-		}).bind(this);
+		return function () {
+			this.parentNode.removeChild(this)
+		}.bind(this)
 	}
-	function gg (opt) {
-		var option = getOption(opt);
-		var parent = option.parent && 
-			(sl.util.isDom(option.parent) && option.parent.tagName !== "body") 
-				? option.parent 
+
+	function gg (conf) {
+		var config = getConfig(conf);
+		var parent = config.parent && 
+			(sl.util.isDom(config.parent) && config.parent.tagName !== "body") 
+				? config.parent 
 				: document.documentElement;
 		
-				
-		var frame,x,title,msg
+		var frame,close,title,msg;
 
-		if (option.type === 'message') {
+		if (config.type === 'message') {
 			frame = sl.util.createElement({
 				dom:'div',
-				style:{
+				attr:sl.util.merge({
+					class : 'frame'
+				}, (config.frame&&config.frame.attr) || {}),
+				style:sl.util.merge({
 					background:'#eee',
 					color:'black',
 					display:'table',
 					padding:'15px',
 					borderRadius:'10px',
 					padding:'10px',
-					border:'5px dashed gray',
+					border:'1px dashed gray',
 					zIndex:'999',
 					left:'50%',
 					top:'50%',
 					transform:'translate(-50%, -50%)',
 					position:'absolute',
-					width:'600px',
-					maxWidth:'400px'
-				},
+					width:config.width
+				}, (config.frame&&config.frame.style) || {}),
 				event:(function () {
 					var gapX, gapY, parent, _move;
 					function _renderMove (elem) {
@@ -96,7 +102,7 @@ github https://github.com/nambiho/ggooltip
 		}
 
 
-		var x = sl.util.createElement({
+		close = sl.util.createElement({
 			dom:'div',
 			parent:frame,
 			html:'<svg width="20px" height="20px" version="1.1" xmlns="http://www.w3.org/2000/svg">'+
@@ -110,11 +116,11 @@ github https://github.com/nambiho/ggooltip
 				right:'10px'
 			},
 			event:{
-				click: removeChild.call(frame)
+				click: removeElement.call(frame)
 			}
 		});
 
-		var title = sl.util.createElement({
+		title = sl.util.createElement({
 			dom:'div',
 			//text:'title2',
 			//html:"<span>span title</span>",
@@ -129,6 +135,8 @@ github https://github.com/nambiho/ggooltip
 			}),
 			parent:frame,
 			style:{
+				background:'#fff',
+				padding:'5px',
 				fontWeight:'bold',
 				fontSize:'large',
 				marginBottom:'10px',
@@ -138,18 +146,23 @@ github https://github.com/nambiho/ggooltip
 			}
 		});
 
-		var msg = sl.util.createElement({
-			dom:'span',
-			text:option.message,
+		msg = sl.util.createElement({
+			dom:'div',
+			text:((sl.util.isString(config.message) && config.message) || (sl.util.isJSON(config.message) && config.message.text)) || "",
 			parent:frame,
 			style:{
-				width:'300px'
+				padding:'5px'
 			}
 		});
 
-		//parent.appendChild(frame);
 		document.body.appendChild(frame);
-		//setTimeout(_remove, 1500)
+		
+		return {
+			frame:frame,
+			close:close,
+			title:title,
+			msg
+		}
 	}
 
 	return gg
