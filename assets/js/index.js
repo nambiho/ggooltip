@@ -5,11 +5,10 @@
 		var sl = new simplelib()
 		,showdiv = sl.util.getbyId('showdiv')
 		;
-		gg({
+		sl.gg({
 			//message:{text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, praesentium.'},
 			message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, praesentium.',
 			x:true
 		})
 	})
-	
 } ());

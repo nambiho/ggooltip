@@ -1,9 +1,9 @@
-/*
-by Hosung moon <nambiho.moon@gmail.com>
-company is HS
-MIT license
-github https://github.com/nambiho/ggooltip
-*/
+/**
+ * by Hosung moon <nambiho.moon@gmail.com>
+ * github https://github.com/nambiho/ggooltip.git
+ * simplelib library : https://github.com/nambiho/jsSimpleLib.git
+ * MIT license
+ */
 
 ;(function (global, gg) {
 	global['gg'] = typeof exports === 'object' || typeof modules === 'object' ? {} : gg;
