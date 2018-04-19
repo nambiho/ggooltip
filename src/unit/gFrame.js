@@ -1,7 +1,7 @@
 module.exports = function (sl) {
 	'use strict';
 
-	var moveEvent,
+	var moveEvent, upEvent,
 	tpXY = {x:0, y:0},
 	tpPosition = {
 		gap: tpXY, pos: tpXY, real: tpXY,left: 0, top: 0, width: 0, height: 0
@@ -59,7 +59,7 @@ module.exports = function (sl) {
 			sl.util.trigger(elem, 'mouseup');
 		}
 	}
-	var upEvent;
+	
 	function mouseDown(e) {
 		if(e.button !== 0) return;
 
