@@ -2,12 +2,11 @@ module.exports = function (sl) {
 	'use strict';
 
 	var moveEvent,
-	elemPosition = {
-		gap : {x:0, y:0},
-		pos : {x:0, y:0},
-		real : {x:0, y:0},
-		left:0,
-		top:0,
+	tpXY = {x:0, y:0},
+	tpPosition = {
+		gap: tpXY, pos: tpXY, real: tpXY,left: 0, top: 0, width: 0, height: 0
+	},
+	elemPosition = sl.util.merge(tpPosition, {
 		init (elem, evt) {
 			var rect = elem.getBoundingClientRect();
 			// real
@@ -45,7 +44,7 @@ module.exports = function (sl) {
 
 			return {x:x,y:y}
 		}
-	}
+	})
 
 	function getMoveEvent (elem) {
 		return (e) => {
