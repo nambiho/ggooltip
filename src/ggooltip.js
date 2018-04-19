@@ -12,7 +12,7 @@
 
 	var sl = new simplelib(),
 	_gFrame = require('./unit/gFrame')(sl),
-	_gConfig = require('./unit/config')(sl)
+	_gConfig = require('./config')(sl)
 	;
 
 	function ggooltip (conf) {
