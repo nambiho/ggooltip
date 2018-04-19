@@ -2,16 +2,15 @@ module.exports = function (sl) {
 	'use strict';
 
 	var moveEvent, upEvent,
-	tpXY = {x:0, y:0},
 	tpPosition = {
-		gap: tpXY, pos: tpXY, real: tpXY,left: 0, top: 0, width: 0, height: 0
+		gap: {x:0, y:0}, pos: {x:0, y:0}, real: {x:0, y:0}, left: 0, top: 0, width: 0, height: 0
 	},
 	elemPosition = sl.util.merge(tpPosition, {
 		init (elem, evt) {
 			var rect = elem.getBoundingClientRect();
 			// real
-			this.real.x = elem.offsetLeft - rect.left;
-			this.real.y = elem.offsetTop - rect.top;
+			this.real.x = elem.offsetLeft - rect.x;
+			this.real.y = elem.offsetTop - rect.y;
 			// gap
 			this.gap.x = evt.pageX - rect.x - this.real.x;
 			this.gap.y = evt.pageY - rect.y - this.real.y;
