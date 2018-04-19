@@ -2,4 +2,3 @@
 
 Message Box with jsSimplelib.
 
-Creating...
