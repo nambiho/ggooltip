@@ -12,38 +12,28 @@
 		<script src="/js/index.js"></script>
 		<link type="text/css" rel="stylesheet" href="/css/base.css" />
 		<style>
-			.span-width {
-				display: block;
-				word-break: break-all;
-				width: -webkit-calc(100% - 30px);
-				width: -moz-calc(100% - 30px);
-				width: calc(100% - 30px);
+			html, body {
+				height: 100%;
+				margin: 0;
+			}
+
+			span.page-title {
+				color: rgb(241, 199, 252);
+				font-size: 5vw;
+			}
+			
+			div.page-title {
+				width: 100%;
+				text-align: center;
+				padding: 5vw 0;
+				background: rgb(19, 124, 84);
 			}
 		</style>
 	</head>
 	<body>
-		<h1>ggooltip message</h1>
-
-		<!--div style="padding:10px; border:5px dashed gray; border-radius: 5px; background-color:#eee; position:absolute; width:290px; left:50%; top:50%; transform:translate(-50%, -50%);">
-			<div style="position:absolute; right:10px;">
-				<svg width="20px" height="20px" version="1.1" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="50%" cy="50%" r="49%" stroke="black" stroke-width="0.5" fill="white" />
-					<line x1="25%" y1="25%" x2="75%" y2="75%" stroke="black" stroke-width="1" />
-					<line x1="25%" y1="75%" x2="75%" y2="25%" stroke="black" stroke-width="1" />
-				</svg>
-			</div>
-			
-			<div style="font-weight:bold; font-size:large; margin-bottom:10px; padding-bottom:10px; border-width:0 0 1px 0; border-style:double; ">
-				<span style="display:block; width:calc(100% - 30px); word-wrap:break-word;">
-					titletitletitletitletitletitletitletitletitle
-				</span>
-			</div>
-			
-			<div>
-				Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, sint.
-			</div>
-		</div-->
+		<div class="page-title">
+			<span class="page-title">ggooltip message</span>
+		</div>
 		
-
 	</body>
 </html>

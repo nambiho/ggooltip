@@ -5,6 +5,7 @@ module.exports = (function () {
 	'use strict';
 
 	return {
+		mode: 'development',
 		entry: {
 			ggooltip: path.join(__dirname , 'src/ggooltip.js')
 		},

@@ -2,9 +2,14 @@ module.exports = function (sl) {
 	'use strict';
 
 	var moveEvent, upEvent,
+	tpOffset = {x:0, y:0},
 	tpPosition = {
-		gap: {x:0, y:0}, pos: {x:0, y:0}, real: {x:0, y:0}, left: 0, top: 0, width: 0, height: 0
-	},
+		gap: sl.util.copy({}, tpOffset),
+		pos: sl.util.copy({}, tpOffset),
+		real: sl.util.copy({}, tpOffset),
+		left: 0, top: 0, width: 0, height: 0
+	}, 
+	margin = {top: 0, right: 0, bottom: 0, left: 0},
 	elemPosition = sl.util.merge(tpPosition, {
 		init (elem, evt) {
 			var rect = elem.getBoundingClientRect();
@@ -23,27 +28,43 @@ module.exports = function (sl) {
 			// size
 			this.width = Math.ceil(rect.width - this.real.x);
 			this.height = Math.ceil(rect.height - this.real.y);
+
+			setElemMargin(elem);
 		},
 		getXY (elem, evt) {
-			var x, y, rect = elem.getBoundingClientRect();
-			if (evt.pageX - elemPosition.pos.x < 0) x = elemPosition.real.x
-			else x = evt.pageX - elemPosition.gap.x
+			var x, y;
+			if (evt.pageX - this.pos.x < 0) x = this.real.x
+			else x = evt.pageX - this.gap.x
 
-			if (evt.pageY - elemPosition.pos.y < 0) y = elemPosition.real.y
-			else y = evt.pageY - elemPosition.gap.y
+			if (evt.pageY - this.pos.y < 0) y = this.real.y
+			else y = evt.pageY - this.gap.y
 
 			var winWidth = window.innerWidth,
 			winHeight = window.innerHeight,
-			right = winWidth - (window.event.pageX + elemPosition.left),
-			bottom = winHeight - (window.event.pageY + elemPosition.top)
+			right = winWidth - (window.event.pageX + this.left),
+			bottom = winHeight - (window.event.pageY + this.top)
 			;
 
 			if (right <= 0) x = (winWidth - this.width) - 1;
 			if (bottom <= 0) y = (winHeight - this.height) - 1;
 
-			return {x:x,y:y}
+			return {x:x-margin.left,y:y-margin.top}
 		}
-	})
+	});
+
+	function setElemMargin (elem) {
+		let style = sl.util.getComputedStyle(elem);
+		let marginData = style.margin.split(" ");
+		Object.keys(margin).forEach(function (val, idx) {
+			let dataIdx = 
+				marginData.length == 1 ? 0 : 
+				marginData.length == 2 ? idx%2 : 
+				marginData.length == 3 ? (idx == 3 ? 1 : idx) : 
+				idx;
+			let data = /[\d\.]+/.exec(marginData[dataIdx]);
+			margin[val] = (data&&+(/[\d\.]+/.exec(marginData[dataIdx])[0]))||0;
+		});
+	}
 
 	function getMoveEvent (elem) {
 		return (e) => {
@@ -54,9 +75,8 @@ module.exports = function (sl) {
 	}
 
 	function getUpEvent (elem) {
-		return (e) => {
-			sl.util.trigger(elem, 'mouseup');
-		}
+		return (e) => sl.util.trigger(elem, 'mouseup');
+		
 	}
 	
 	function mouseDown(e) {
@@ -87,18 +107,19 @@ module.exports = function (sl) {
 		var _frame = sl.util.createElement({
 			dom: 'div',
 			attr: sl.util.merge({
-				class: 'frame'
+				class: 'frame',
+				id: 'frame'
 			}, (config.frame && config.frame.attr) || {}),
 			style:sl.util.merge({
 				'cursor': 'default',
 				'background': 'white'
 			}, (config.frame && config.frame.style)),
-			text: config.message, /* = temporary */
 			event: {
 				mousedown: mouseDown,
 				mouseup: mouseUp
 			}
-		})
-		return _frame;
+		});
+
+		return _frame
 	}
 }

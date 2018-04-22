@@ -9,13 +9,28 @@
 
 .frame {
 	display : table;
-	/*border-radius : 10px;*/
-	padding : 0px;
-	border : 1px solid #aaa;
+	border-radius : 6px;
+	padding : 10px;
+	border : 1px solid;
 	z-index : 999;
 	left : 50%;
 	top : 50%;
-	/*transform : translate(-50%, -50%);*/
+	transform : translate(-50%, -50%);
 	position : absolute;
 	min-width: 100px;
+	width: 300px;
 }
+
+/*
+.frame {
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+	width:300px;
+	height:100px;
+	position: absolute;
+	border : 1px solid #aaa;
+}
+*/
