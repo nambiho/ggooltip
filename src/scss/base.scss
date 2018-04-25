@@ -1,3 +1,12 @@
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+	border-radius: $radius;
+}
+
+
 .unselectable {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -9,7 +18,7 @@
 
 .frame {
 	display : table;
-	border-radius : 6px;
+	@include border-radius(5px);
 	padding : 10px;
 	border : 1px solid;
 	z-index : 999;
@@ -20,17 +29,3 @@
 	min-width: 100px;
 	width: 300px;
 }
-
-/*
-.frame {
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	margin:auto;
-	width:300px;
-	height:100px;
-	position: absolute;
-	border : 1px solid #aaa;
-}
-*/

@@ -1,27 +1,42 @@
 var path = require('path');
 
-
+const lifecycle = process.env.npm_lifecycle_event;
+let entry = {ggooltip: path.join(__dirname , 'src/ggooltip.js')};
+if (lifecycle === 'dev') {
+	entry.ggooltip = path.join(__dirname , 'app.js');
+}
 module.exports = (function () {
 	'use strict';
 
 	return {
 		mode: 'development',
-		entry: {
-			ggooltip: path.join(__dirname , 'src/ggooltip.js')
-		},
+		entry: entry,
 		output: {
-			path : path.join(__dirname , 'dist'),
+			path : path.join(__dirname , 'dist/js'),
 			filename : '[name].js',
-			publicPath: '/dist/'
+			publicPath: '/dist/js/'
 		},
 		module: {
 			rules: [{
-				test: /\.js?$/,
+				test: /\.js$/,
 				loader: 'babel-loader',
-				exclude: ['/node_modules'],
+				exclude: /node_modules/,
 				options: {
 					presets: ['env']
 				}
+			}, {
+				test: /\.scss$/,
+				//exclude: /node-modules/,
+				use: [{
+					loader: 'style-loader'
+				},{
+					loader: 'css-loader'
+				},{
+					loader: 'sass-loader',
+					options: {
+						includePaths: ['./src/scss/base.scss']
+					}
+				}]
 			}]
 		},
 		devServer: {

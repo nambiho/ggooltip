@@ -26,10 +26,11 @@
 		config.close = _gClose(config);
 
 		(config.parent||document.body).append(config.frame);
-		
+
 		return {
 			config: config
 		}
+
 	}
 
 	/**

@@ -8,7 +8,7 @@ module.exports = function (sl) {
 			this.parentNode.removeChild(this)
 		}.bind(this)
 	}
-
+	
 	return function (config) {
 		let close = sl.util.createElement({
 			dom: 'div',
@@ -21,7 +21,6 @@ module.exports = function (sl) {
 			style: {
 				cursor: 'pointer',
 				position: 'relative',
-				// border:'1px solid gray',
 				right: '0',
 				margin: '12px 0',
 				padding: 0,

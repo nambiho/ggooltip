@@ -1,11 +1,10 @@
 "use strict";
-/*
+
 const express = require('express');
 const app = express();
 const path = require('path');
 const _static = {
 	'/js': 'assets/js',
-	'/css': 'dist/css',
 	'/dist': 'dist',
 	'/lib': 'lib'
 };
@@ -16,7 +15,6 @@ app.set('rootdir', __dirname);
 
 function eStatic (ar) {
 	for (let x in ar) {
-		console.log(express.static(path.join(__dirname, ar[x])))
 		app.use(x, express.static(path.join(__dirname, ar[x])));
 	}
 }
@@ -27,6 +25,4 @@ app.listen(app.get('port'), function (req, res) {
 });
 
 require('./router/main')(app);
-*/
-const basecss = require('./src/scss/base.scss');
-const ggooltip = require('./src/ggooltip');
+
