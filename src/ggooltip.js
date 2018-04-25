@@ -30,13 +30,13 @@
 		return {
 			config: config
 		}
-
 	}
 
 	/**
 	 * simplelib prototype with ggooltip
 	 */
-	sl.util.proto(simplelib, 'ggooltip', function (conf) {
-		return new ggooltip(conf);
+	sl.util.proto(simplelib, {'ggooltip': function (conf) {
+			return new ggooltip(conf);
+		}
 	});
 } (window.simplelib));
