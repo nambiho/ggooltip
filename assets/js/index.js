@@ -10,6 +10,6 @@
 			//message:{text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, praesentium.'},
 			message:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, praesentium.',
 			x:true
-		})
+		});
 	})
 } ());

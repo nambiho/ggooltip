@@ -40,6 +40,7 @@ module.exports = (function () {
 			}]
 		},
 		devServer: {
+			contentBase: [path.join(__dirname, "."),path.join(__dirname, "assets")],
 			before (app /* <= express() */) {
 				const express = require('express');
 				function eStatic (ar={
