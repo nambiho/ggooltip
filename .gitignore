@@ -6,3 +6,6 @@ temp/
 
 # node_modules
 node_modules/
+
+# sass-cache
+.sass-cache/
