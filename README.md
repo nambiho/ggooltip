@@ -1,4 +1,4 @@
 # ggooltip
 
-Message Box with jsSimplelib.
+Message Box
 
