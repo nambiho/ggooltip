@@ -36,6 +36,8 @@
   },
   "dependencies": {},
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "fstream": ">=1.0.12",
+    "tar": ">=2.2.2"
   }
 }
